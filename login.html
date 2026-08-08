@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>ReserveTech - Login</title>
+  </head>
+  <body>
+    <header>
+      <h1>ReserveTech</h1>
+    </header>
+
+    <main>
+      <div class="container-acessar-conta">
+        <h2>Acessar Conta</h2>
+
+        <div
+          id="mensagem-sessao"
+          style="
+            display: none;
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-bottom: 16px;
+          "
+        ></div>
+
+        <form id="form-login">
+          <div class="coleta-dados">
+            <label for="email">E-mail</label>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="seuemail@exemplo.com"
+              autocomplete="email"
+              required
+            />
+          </div>
+
+          <div class="coleta-dados">
+            <label for="password">Senha</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              placeholder="********"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+
+          <span id="erro-login" class="mensagem-erro"></span>
+
+          <button type="submit" class="btn-submit">Entrar</button>
+        </form>
+      </div>
+    </main>
+
+    <script>
+      const mensagemSessao = sessionStorage.getItem("mensagemLogin");
+      if (mensagemSessao) {
+        sessionStorage.removeItem("mensagemLogin");
+        const container = document.querySelector("#mensagem-sessao");
+        container.textContent = mensagemSessao;
+        container.style.display = "block";
+      }
+    </script>
+    <script src="js/config.js"></script>
+    <script src="js/login.js"></script>
+  </body>
+</html>

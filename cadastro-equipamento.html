@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>ReserveTech - Cadastrar Equipamento</title>
+  </head>
+  <body>
+    <header class="header-com-acao">
+      <h1>ReserveTech</h1>
+      <span id="timer-sessao" title="Tempo restante da sessão"></span>
+    </header>
+
+    <main>
+      <div class="container-coleta-formulario">
+        <a href="painel-ti.html" class="link-voltar"
+          >&larr; Voltar para o Painel</a
+        >
+
+        <h2>Cadastrar Equipamento</h2>
+
+        <form id="form-equipamento">
+          <div class="coleta-dados">
+            <label for="nome">Nome</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              placeholder="Ex: Projetor Epson"
+              required
+            />
+          </div>
+
+          <div class="coleta-dados">
+            <label for="descricao">Descrição</label>
+            <input
+              type="text"
+              id="descricao"
+              name="descricao"
+              placeholder="Ex: Projetor portátil HD"
+            />
+          </div>
+
+          <div class="coleta-dados">
+            <label for="quantidade">Quantidade Disponível</label>
+            <input
+              type="number"
+              id="quantidade"
+              name="quantidade"
+              min="0"
+              value="1"
+              required
+            />
+          </div>
+
+          <div class="coleta-dados">
+            <label for="status">Status</label>
+            <select id="status" name="status" required>
+              <option value="DISPONIVEL">Disponível</option>
+              <option value="EM_USO">Em uso</option>
+              <option value="EM_MANUTENCAO">Em manutenção</option>
+            </select>
+          </div>
+
+          <span id="erro-equipamento" class="mensagem-erro"></span>
+
+          <button type="submit" class="btn-submit">Salvar Equipamento</button>
+        </form>
+      </div>
+    </main>
+
+    <script src="js/config.js"></script>
+
+    <script src="js/logout.js"></script>
+    <script src="js/cadastro-equipamento.js"></script>
+  </body>
+</html>

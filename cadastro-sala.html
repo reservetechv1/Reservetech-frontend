@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>ReserveTech - Cadastrar Sala</title>
+  </head>
+  <body>
+    <header class="header-com-acao">
+      <h1>ReserveTech</h1>
+      <span id="timer-sessao" title="Tempo restante da sessão"></span>
+    </header>
+
+    <main>
+      <div class="container-coleta-formulario">
+        <a href="painel-ti.html" class="link-voltar"
+          >&larr; Voltar para o Painel</a
+        >
+
+        <h2>Cadastrar Sala</h2>
+
+        <form id="form-sala">
+          <div class="coleta-dados">
+            <label for="nome">Nome da Sala</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              placeholder="Ex: Sala 101"
+              required
+            />
+          </div>
+
+          <div class="coleta-dados">
+            <label for="andar">Andar</label>
+            <input
+              type="text"
+              id="andar"
+              name="andar"
+              placeholder="Ex: 1º andar"
+              required
+            />
+          </div>
+
+          <span id="erro-sala" class="mensagem-erro"></span>
+
+          <button type="submit" class="btn-submit">Salvar Sala</button>
+        </form>
+      </div>
+    </main>
+
+    <script src="js/config.js"></script>
+
+    <script src="js/logout.js"></script>
+    <script src="js/cadastro-sala.js"></script>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <title>ReserveTech - Relatórios</title>
+  </head>
+  <body>
+    <header class="header-com-acao">
+      <h1>ReserveTech — Relatórios</h1>
+      <span id="timer-sessao" title="Tempo restante da sessão"></span>
+      <button id="btn-logout" class="btn-logout">Sair</button>
+    </header>
+
+    <main>
+      <div class="container-coleta-formulario" style="max-width: 800px">
+        <a href="painel-ti.html" class="link-voltar">Voltar para o Painel</a>
+        <h2>Relatórios Gerenciais</h2>
+
+        <div class="barra-acoes">
+          <div class="filtro-periodo">
+            <label for="tipo-relatorio">Selecione o Relatório:</label>
+            <select id="tipo-relatorio">
+              <option value="selecione" selected disabled>Selecione...</option>
+              <option value="reservas-todas">Todas as Reservas</option>
+              <option value="reservas-professor">Reservas por Professor</option>
+              <option value="dispositivos-todos">Todos os Dispositivos</option>
+              <option value="dispositivos-manutencao">
+                Dispositivos em Manutenção
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div
+          id="filtro-data-container"
+          style="display: none; margin-bottom: 20px"
+        >
+          <label for="input-data-relatorio" style="font-weight: 600"
+            >Filtrar por dia:</label
+          >
+          <input
+            type="date"
+            id="input-data-relatorio"
+            style="
+              padding: 6px 10px;
+              border: 1px solid #ccc;
+              border-radius: 6px;
+              margin-right: 10px;
+            "
+          />
+          <button
+            id="btn-buscar-data"
+            class="btn-submit"
+            style="margin-top: 0; padding: 6px 12px"
+          >
+            Buscar
+          </button>
+          <button
+            id="btn-limpar-data"
+            class="btn-neutro"
+            style="margin-top: 0; padding: 6px 12px"
+          >
+            Ver Todas
+          </button>
+        </div>
+
+        <div
+          id="filtro-professor-container"
+          style="display: none; margin-bottom: 20px"
+        >
+          <label for="select-professor" style="font-weight: 600"
+            >Professor:</label
+          >
+          <select
+            id="select-professor"
+            style="
+              padding: 6px 10px;
+              border: 1px solid #ccc;
+              border-radius: 6px;
+              margin-right: 10px;
+            "
+          >
+            <option value="">Carregando professores...</option>
+          </select>
+          <button
+            id="btn-buscar-professor"
+            class="btn-submit"
+            style="margin-top: 0; padding: 6px 12px"
+          >
+            Buscar
+          </button>
+        </div>
+
+        <div
+          id="container-exportacao"
+          style="
+            display: none;
+            margin-bottom: 20px;
+            gap: 10px;
+            justify-content: flex-end;
+          "
+        >
+          <button
+            id="btn-exportar-pdf"
+            class="btn-submit"
+            style="background-color: #dc3545; margin-top: 0"
+          >
+            Baixar PDF
+          </button>
+          <button
+            id="btn-exportar-csv"
+            class="btn-submit"
+            style="background-color: #28a745; margin-top: 0"
+          >
+            Baixar Planilha
+          </button>
+        </div>
+
+        <div id="area-resultado-relatorio">
+          <p>Selecione um relatório no menu acima para visualizar os dados.</p>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/config.js"></script>
+
+    <script src="js/logout.js"></script>
+    <script src="js/relatorios.js"></script>
+  </body>
+</html>

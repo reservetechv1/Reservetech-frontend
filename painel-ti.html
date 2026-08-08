@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>ReserveTech - Painel TI</title>
+  </head>
+  <body>
+    <header class="header-com-acao">
+      <h1>ReserveTech — Painel TI</h1>
+      <span id="timer-sessao" title="Tempo restante da sessão"></span>
+      <button id="btn-logout" class="btn-logout">Sair</button>
+    </header>
+
+    <main>
+      <div class="container-coleta-formulario">
+        <h2 id="saudacao">Bem-vindo!</h2>
+
+        <div class="secao-painel">
+          <h3>Gerenciar</h3>
+          <div class="grid-botoes">
+            <a href="cadastro-equipamento.html" class="botao-painel"
+              >Cadastrar Equipamento</a
+            >
+            <a href="gerenciar-equipamentos.html" class="botao-painel"
+              >Gerenciar Equipamentos</a
+            >
+            <a href="cadastro-sala.html" class="botao-painel">Cadastrar Sala</a>
+            <a href="gerenciar-salas.html" class="botao-painel"
+              >Gerenciar Salas</a
+            >
+            <a href="cadastro-usuario.html" class="botao-painel"
+              >Cadastrar Usuário</a
+            >
+            <a href="gerenciar-usuarios.html" class="botao-painel"
+              >Gerenciar Usuários</a
+            >
+            <a href="relatorios.html" class="botao-painel botao-central"
+              >Relatórios</a
+            >
+          </div>
+        </div>
+
+        <div class="secao-painel">
+          <h3>Todas as Reservas</h3>
+          <div class="barra-acoes">
+            <div class="filtro-periodo">
+              <label for="filtro-status">Status:</label>
+              <select id="filtro-status">
+                <option value="todas">Todas</option>
+                <option value="PENDENTE">Pendentes</option>
+                <option value="CONFIRMADA">Confirmadas</option>
+                <option value="CANCELADA">Canceladas</option>
+              </select>
+            </div>
+          </div>
+          <div id="lista-reservas"></div>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/config.js"></script>
+
+    <script src="js/logout.js"></script>
+    <script src="js/painel-ti.js"></script>
+  </body>
+</html>

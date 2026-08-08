@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>ReserveTech - Nova Reserva</title>
+  </head>
+  <body>
+    <header class="header-com-acao">
+      <h1>ReserveTech</h1>
+      <span id="timer-sessao" title="Tempo restante da sessão"></span>
+    </header>
+
+    <main>
+      <div class="container-coleta-formulario">
+        <a href="reservas.html" class="link-voltar"
+          >&larr; Voltar para Minhas Reservas</a
+        >
+
+        <h2>Nova Reserva</h2>
+
+        <form id="form-reserva">
+          <div class="coleta-dados">
+            <label for="sala">Sala</label>
+            <select id="sala" name="sala" required>
+              <option value="" disabled selected>Carregando salas...</option>
+            </select>
+          </div>
+
+          <div class="coleta-dados">
+            <label for="data">Data</label>
+            <input type="date" id="data" name="data" required />
+          </div>
+
+          <div class="coleta-dados">
+            <label for="horario-inicio">Horário de Início</label>
+            <select id="horario-inicio" name="horarioInicio" required>
+              <option value="" disabled selected>Carregando...</option>
+            </select>
+          </div>
+
+          <div class="coleta-dados">
+            <label for="horario-fim">Horário de Fim</label>
+            <select id="horario-fim" name="horarioFim" required>
+              <option value="" disabled selected>Carregando...</option>
+            </select>
+          </div>
+
+          <div class="coleta-dados">
+            <label>Dispositivos</label>
+            <div id="lista-itens"></div>
+            <button
+              type="button"
+              id="btn-adicionar-item"
+              class="btn-secundario"
+            >
+              + Adicionar dispositivo
+            </button>
+          </div>
+
+          <span id="erro-reserva" class="mensagem-erro"></span>
+
+          <button type="submit" class="btn-submit">Criar Reserva</button>
+        </form>
+      </div>
+    </main>
+
+    <script src="js/config.js"></script>
+
+    <script src="js/logout.js"></script>
+    <script src="js/nova-reserva.js"></script>
+  </body>
+</html>

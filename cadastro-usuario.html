@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>ReserveTech - Cadastrar Usuário</title>
+  </head>
+  <body>
+    <header class="header-com-acao">
+      <h1>ReserveTech</h1>
+      <span id="timer-sessao" title="Tempo restante da sessão"></span>
+    </header>
+
+    <main>
+      <div class="container-coleta-formulario">
+        <a href="painel-ti.html" class="link-voltar"
+          >&larr; Voltar para o Painel</a
+        >
+
+        <h2>Cadastrar Usuário</h2>
+
+        <form id="form-usuario">
+          <div class="coleta-dados">
+            <label for="nome">Nome</label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              placeholder="Nome completo"
+              required
+            />
+          </div>
+
+          <div class="coleta-dados">
+            <label for="email">E-mail</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="email@exemplo.com"
+              required
+            />
+          </div>
+
+          <div class="coleta-dados">
+            <label for="senha">Senha</label>
+            <input
+              type="password"
+              id="senha"
+              name="senha"
+              placeholder="********"
+              required
+            />
+          </div>
+
+          <div class="coleta-dados">
+            <label for="perfil">Perfil</label>
+            <select id="perfil" name="perfil" required>
+              <option value="PROFESSOR">Professor</option>
+              <option value="TI">TI</option>
+            </select>
+          </div>
+
+          <span id="erro-usuario" class="mensagem-erro"></span>
+
+          <button type="submit" class="btn-submit">Salvar Usuário</button>
+        </form>
+      </div>
+    </main>
+
+    <script src="js/config.js"></script>
+
+    <script src="js/logout.js"></script>
+    <script src="js/cadastro-usuario.js"></script>
+  </body>
+</html>
