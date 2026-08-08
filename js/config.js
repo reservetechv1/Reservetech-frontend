@@ -1,1 +1,1 @@
-const API = "https://reservetech-backend.onrender.com";
+const API = "https://reservetech.onrender.com";
