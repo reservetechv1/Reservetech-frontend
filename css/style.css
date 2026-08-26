@@ -571,3 +571,111 @@ fieldset legend {
   padding: 14px 32px;
   width: auto;
 }
+
+/* ===== Link "Sobre" na landing page ===== */
+.link-sobre {
+  display: block;
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 14px;
+  text-decoration: none;
+}
+.link-sobre:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+/* ===== Página Sobre ===== */
+.header-sobre {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.header-sobre h1 {
+  color: #1a1a1a;
+  font-size: 22px;
+}
+.link-voltar {
+  color: #4a90d9;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 14px;
+}
+.link-voltar:hover {
+  text-decoration: underline;
+}
+
+.container-sobre {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+.sobre-bloco {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 32px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.sobre-bloco h2 {
+  color: #1a1a1a;
+  font-size: 20px;
+  margin-bottom: 14px;
+  border-left: 4px solid #4a90d9;
+  padding-left: 12px;
+}
+
+.sobre-bloco p {
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.sobre-bloco p:last-child {
+  margin-bottom: 0;
+}
+
+.equipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.equipe-card {
+  background-color: #f4f6f8;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.equipe-card .equipe-nome {
+  font-weight: bold;
+  color: #1a1a1a;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.equipe-card .equipe-papel {
+  color: #4a90d9;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sobre-contato {
+  text-align: center;
+}
+
+.sobre-contato a {
+  color: #4a90d9;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.sobre-contato a:hover {
+  text-decoration: underline;
+}
