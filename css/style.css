@@ -666,6 +666,32 @@ fieldset legend {
   font-weight: 600;
 }
 
+.equipe-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.equipe-links a {
+  color: #4a90d9;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid #4a90d9;
+  border-radius: 20px;
+  padding: 5px 12px;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+
+.equipe-links a:hover {
+  background-color: #4a90d9;
+  color: #ffffff;
+}
+
 .sobre-contato {
   text-align: center;
 }
