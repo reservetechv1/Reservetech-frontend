@@ -1,3 +1,58 @@
+/* ===== TOKENS DE TEMA ===== */
+/* Tema escuro é o padrão */
+:root {
+  --bg: #1a1d21;
+  --bg-cabecalho: #14171a;
+  --bg-superficie: #202327;
+  --linha: #2a2e33;
+  --texto: #d8dade;
+  --texto-suave: #8c9096;
+  --destaque: #4f8fc4;
+  --destaque-hover: #3f76a3;
+  --destaque-tint: rgba(79, 143, 196, 0.14);
+  --destaque-glow: rgba(79, 143, 196, 0.25);
+  --destaque-disabled: #35526b;
+  --verde: #5a9e6f;
+  --verde-hover: #4a8760;
+  --ambar: #c9973b;
+  --vermelho: #b5564a;
+  --vermelho-hover: #9c4a3f;
+  --neutro-bg: #4b4f54;
+  --neutro-hover: #5a5f66;
+  --logo-bg: #f4f3ef;
+  --sombra: rgba(0, 0, 0, 0.35);
+  --status-pendente-bg: rgba(201, 151, 59, 0.15);
+  --status-confirmada-bg: rgba(90, 158, 111, 0.15);
+  --status-cancelada-bg: rgba(181, 86, 74, 0.15);
+}
+
+/* Tema claro */
+.tema-claro {
+  --bg: #f2f2f0;
+  --bg-cabecalho: #ffffff;
+  --bg-superficie: #ffffff;
+  --linha: #d6d3cc;
+  --texto: #292722;
+  --texto-suave: #6b6860;
+  --destaque: #1c4d72;
+  --destaque-hover: #163c59;
+  --destaque-tint: rgba(28, 77, 114, 0.08);
+  --destaque-glow: rgba(28, 77, 114, 0.15);
+  --destaque-disabled: #a9c0d1;
+  --verde: #3f7a52;
+  --verde-hover: #336343;
+  --ambar: #a8791f;
+  --vermelho: #a3402f;
+  --vermelho-hover: #832f22;
+  --neutro-bg: #6c757d;
+  --neutro-hover: #5a6268;
+  --logo-bg: #ffffff;
+  --sombra: rgba(0, 0, 0, 0.08);
+  --status-pendente-bg: rgba(168, 121, 31, 0.12);
+  --status-confirmada-bg: rgba(63, 122, 82, 0.12);
+  --status-cancelada-bg: rgba(163, 64, 47, 0.12);
+}
+
 /* ===== RESET E BASE ===== */
 * {
   box-sizing: border-box;
@@ -7,30 +62,59 @@
 
 body {
   font-family: "Segoe UI", Arial, sans-serif;
-  background-color: #f4f6f8;
-  color: #1a1a1a;
+  background-color: var(--bg);
+  color: var(--texto);
   line-height: 1.5;
 }
 
 header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #e0e0e0;
+  background-color: var(--bg-cabecalho);
+  border-bottom: 1px solid var(--linha);
   padding: 20px;
 }
 
 header h1 {
   text-align: center;
-  color: #1a1a1a;
+  color: var(--texto);
+}
+
+.header-com-acao h1 {
+  text-align: left;
+}
+
+.header-acoes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-tema {
+  background: transparent;
+  border: 1px solid var(--linha);
+  color: var(--texto);
+  border-radius: 6px;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+}
+
+.btn-tema:hover {
+  background-color: var(--bg-superficie);
 }
 
 #timer-sessao {
   font-size: 15px;
   font-weight: bold;
-  color: #555;
-  margin-right: 12px;
-  border: 1px solid #ccc;
+  color: var(--texto-suave);
+  border: 1px solid var(--linha);
   border-radius: 6px;
   padding: 4px 10px;
+  background-color: var(--bg-superficie);
 }
 
 /* ===== LOGIN ===== */
@@ -43,10 +127,10 @@ main {
 }
 
 .container-acessar-conta {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
+  background-color: var(--bg-superficie);
+  border: 1px solid var(--linha);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px var(--sombra);
   padding: 50px 40px;
   width: 100%;
   max-width: 400px;
@@ -58,7 +142,7 @@ main {
 .container-acessar-conta h2 {
   font-size: 26px;
   margin-bottom: 24px;
-  color: #1a1a1a;
+  color: var(--texto);
 }
 
 /* ===== FORMULÁRIOS (compartilhado) ===== */
@@ -80,7 +164,7 @@ form {
 .coleta-dados label {
   font-size: 14px;
   font-weight: 600;
-  color: #333;
+  color: var(--texto);
 }
 
 .coleta-dados input,
@@ -88,18 +172,20 @@ form {
 .coleta-dados textarea {
   font-size: 16px;
   padding: 10px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--linha);
   border-radius: 6px;
   font-family: inherit;
   width: 100%;
+  background-color: var(--bg-superficie);
+  color: var(--texto);
 }
 
 .coleta-dados input:focus,
 .coleta-dados select:focus,
 .coleta-dados textarea:focus {
-  border-color: #4a90d9;
+  border-color: var(--destaque);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.15);
+  box-shadow: 0 0 0 3px var(--destaque-glow);
 }
 
 .coleta-dados textarea {
@@ -108,18 +194,18 @@ form {
 
 .instrucao {
   font-size: 13px;
-  color: #666;
+  color: var(--texto-suave);
 }
 
 .contador-container {
   font-size: 13px;
-  color: #888;
+  color: var(--texto-suave);
   text-align: right;
 }
 
 /* ===== RADIO E CHECKBOX ===== */
 fieldset.coleta-dados {
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--linha);
   border-radius: 8px;
   padding: 16px;
 }
@@ -127,7 +213,7 @@ fieldset.coleta-dados {
 fieldset legend {
   font-size: 14px;
   font-weight: 600;
-  color: #333;
+  color: var(--texto);
   padding: 0 6px;
 }
 
@@ -154,7 +240,7 @@ fieldset legend {
 
 /* ===== BOTÃO ===== */
 .btn-submit {
-  background-color: #4a90d9;
+  background-color: var(--destaque);
   color: white;
   border: none;
   border-radius: 6px;
@@ -167,16 +253,16 @@ fieldset legend {
 }
 
 .btn-submit:hover {
-  background-color: #357abd;
+  background-color: var(--destaque-hover);
 }
 
 .btn-submit:disabled {
-  background-color: #a0bcd9;
+  background-color: var(--destaque-disabled);
   cursor: not-allowed;
 }
 
 .btn-editar {
-  background-color: #4a90d9;
+  background-color: var(--destaque);
   color: white;
   border: none;
   border-radius: 6px;
@@ -189,7 +275,7 @@ fieldset legend {
 }
 
 .btn-neutro {
-  background-color: #6c757d;
+  background-color: var(--neutro-bg);
   color: white;
   border: none;
   border-radius: 6px;
@@ -200,15 +286,15 @@ fieldset legend {
 }
 
 .btn-editar:hover {
-  background-color: #357abd;
+  background-color: var(--destaque-hover);
 }
 
 .btn-neutro:hover {
-  background-color: #5a6268;
+  background-color: var(--neutro-hover);
 }
 
 .btn-cancelar {
-  background-color: #d9534f;
+  background-color: var(--vermelho);
   color: white;
   border: none;
   border-radius: 6px;
@@ -224,8 +310,8 @@ fieldset legend {
 /* ===== BOTÃO SECUNDÁRIO E ITENS DINÂMICOS ===== */
 .btn-secundario {
   background-color: transparent;
-  color: #4a90d9;
-  border: 1px dashed #4a90d9;
+  color: var(--destaque);
+  border: 1px dashed var(--destaque);
   border-radius: 6px;
   padding: 8px 16px;
   font-size: 14px;
@@ -235,7 +321,7 @@ fieldset legend {
 }
 
 .btn-secundario:hover {
-  background-color: #f0f7ff;
+  background-color: var(--destaque-tint);
 }
 
 .linha-item {
@@ -254,7 +340,7 @@ fieldset legend {
 }
 
 .btn-remover-item {
-  background-color: #d9534f;
+  background-color: var(--vermelho);
   color: white;
   border: none;
   border-radius: 6px;
@@ -268,21 +354,18 @@ fieldset legend {
 }
 
 .btn-remover-item:hover {
-  background-color: #c9302c;
-}
-
-.btn-remover-item:hover {
-  background-color: #c9302c;
+  background-color: var(--vermelho-hover);
 }
 
 /* ===== CARDS DE RESERVA ===== */
 .card-reserva {
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--linha);
   border-radius: 8px;
   padding: 16px;
   margin-bottom: 12px;
   word-break: break-word;
   overflow-wrap: break-word;
+  background-color: var(--bg-superficie);
 }
 
 .card-reserva .status {
@@ -294,18 +377,18 @@ fieldset legend {
 }
 
 .status-pendente {
-  background-color: #fff3cd;
-  color: #856404;
+  background-color: var(--status-pendente-bg);
+  color: var(--ambar);
 }
 
 .status-confirmada {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: var(--status-confirmada-bg);
+  color: var(--verde);
 }
 
 .status-cancelada {
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: var(--status-cancelada-bg);
+  color: var(--vermelho);
 }
 
 /* ===== DUAS COLUNAS DASHBOARD ===== */
@@ -326,13 +409,13 @@ fieldset legend {
 }
 
 .coluna-pendente {
-  background-color: #fff3cd;
-  color: #856404;
+  background-color: var(--status-pendente-bg);
+  color: var(--ambar);
 }
 
 .coluna-confirmada {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: var(--status-confirmada-bg);
+  color: var(--verde);
 }
 
 @media (max-width: 600px) {
@@ -357,8 +440,10 @@ fieldset legend {
 
 .filtro-periodo select {
   padding: 6px 10px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--linha);
   border-radius: 6px;
+  background-color: var(--bg-superficie);
+  color: var(--texto);
 }
 
 .btn-link {
@@ -369,8 +454,8 @@ fieldset legend {
 
 .link-voltar {
   display: inline-block;
-  color: #4a90d9;
-  border: black solid 1px;
+  color: var(--destaque);
+  border: 1px solid var(--linha);
   border-radius: 5px;
   padding: 3px;
   text-decoration: none;
@@ -391,8 +476,8 @@ fieldset legend {
 
 .btn-logout {
   background-color: transparent;
-  border: 1px solid #d9534f;
-  color: #d9534f;
+  border: 1px solid var(--vermelho);
+  color: var(--vermelho);
   border-radius: 6px;
   padding: 6px 14px;
   font-size: 14px;
@@ -400,7 +485,7 @@ fieldset legend {
 }
 
 .btn-logout:hover {
-  background-color: #d9534f;
+  background-color: var(--vermelho);
   color: white;
 }
 
@@ -414,7 +499,7 @@ fieldset legend {
 
 .botao-painel {
   display: block;
-  background-color: #4a90d9;
+  background-color: var(--destaque);
   color: white;
   text-decoration: none;
   text-align: center;
@@ -429,11 +514,11 @@ fieldset legend {
 }
 
 .botao-painel:hover {
-  background-color: #357abd;
+  background-color: var(--destaque-hover);
 }
 
 .btn-confirmar {
-  background-color: #27ae60;
+  background-color: var(--verde);
   color: white;
   border: none;
   border-radius: 6px;
@@ -444,11 +529,11 @@ fieldset legend {
 }
 
 .btn-confirmar:hover {
-  background-color: #1e8449;
+  background-color: var(--verde-hover);
 }
 
 .btn-reverter-para-pendente {
-  background-color: #7f8c8d;
+  background-color: var(--neutro-bg);
   color: white;
   border: none;
   border-radius: 6px;
@@ -460,7 +545,7 @@ fieldset legend {
 }
 
 .btn-reverter-para-pendente:hover {
-  background-color: #7f8c8d;
+  background-color: var(--neutro-hover);
 }
 
 .secao-painel {
@@ -469,13 +554,13 @@ fieldset legend {
 
 .secao-painel h3 {
   font-size: 16px;
-  color: #555;
+  color: var(--texto-suave);
   margin-bottom: 8px;
 }
 
 /* ===== MENSAGENS DE ERRO ===== */
 .mensagem-erro {
-  color: #d9534f;
+  color: var(--vermelho);
   font-size: 14px;
   min-height: 18px;
 }
@@ -487,7 +572,7 @@ fieldset legend {
 }
 
 .link-auxiliar a {
-  color: #4a90d9;
+  color: var(--destaque);
   text-decoration: none;
   font-size: 14px;
 }
@@ -498,10 +583,10 @@ fieldset legend {
 
 /* ===== PÁGINA DE CADASTRO ===== */
 .container-coleta-formulario {
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
+  background-color: var(--bg-superficie);
+  border: 1px solid var(--linha);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 12px var(--sombra);
   padding: 40px;
   width: 100%;
   max-width: 960px;

@@ -10,8 +10,15 @@
   <body>
     <header class="header-com-acao">
       <h1>ReserveTech — Relatórios</h1>
-      <span id="timer-sessao" title="Tempo restante da sessão"></span>
-      <button id="btn-logout" class="btn-logout">Sair</button>
+      <div class="header-acoes">
+        <button
+          class="btn-tema"
+          onclick="alternarTema()"
+          title="Alternar tema"
+        ></button>
+        <span id="timer-sessao" title="Tempo restante da sessão"></span>
+        <button id="btn-logout" class="btn-logout">Sair</button>
+      </div>
     </header>
 
     <main>
@@ -126,6 +133,7 @@
     </main>
 
     <script src="js/config.js"></script>
+    <script src="js/tema.js"></script>
 
     <script src="js/logout.js"></script>
     <script src="js/relatorios.js"></script>
