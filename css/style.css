@@ -24,6 +24,7 @@
   --status-pendente-bg: rgba(201, 151, 59, 0.15);
   --status-confirmada-bg: rgba(90, 158, 111, 0.15);
   --status-cancelada-bg: rgba(181, 86, 74, 0.15);
+  --borda-forte: rgba(255, 255, 255, 0.55);
 }
 
 /* Tema claro */
@@ -51,6 +52,7 @@
   --status-pendente-bg: rgba(168, 121, 31, 0.12);
   --status-confirmada-bg: rgba(63, 122, 82, 0.12);
   --status-cancelada-bg: rgba(163, 64, 47, 0.12);
+  --borda-forte: rgba(0, 0, 0, 0.55);
 }
 
 /* ===== RESET E BASE ===== */
@@ -76,10 +78,6 @@ header {
 header h1 {
   text-align: center;
   color: var(--texto);
-}
-
-.header-com-acao h1 {
-  text-align: left;
 }
 
 .header-acoes {
@@ -455,9 +453,9 @@ fieldset legend {
 .link-voltar {
   display: inline-block;
   color: var(--destaque);
-  border: 1px solid var(--linha);
+  border: 1.5px solid var(--borda-forte);
   border-radius: 5px;
-  padding: 3px;
+  padding: 5px 12px;
   text-decoration: none;
   font-size: 14px;
   margin-bottom: 16px;
@@ -465,6 +463,34 @@ fieldset legend {
 
 .link-voltar:hover {
   text-decoration: underline;
+}
+
+/* ===== MARCA (logo + nome no cabeçalho) ===== */
+.marca-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.marca-logo {
+  height: 40px;
+  width: auto;
+  background-color: var(--logo-bg);
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.marca-nome {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--texto);
+  white-space: nowrap;
+}
+
+.header-login {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* ===== HEADER COM AÇÃO (LOGOUT) ===== */
