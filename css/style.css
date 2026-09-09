@@ -309,7 +309,7 @@ fieldset legend {
 .btn-secundario {
   background-color: transparent;
   color: var(--destaque);
-  border: 1px dashed var(--destaque);
+  border: 2px solid var(--destaque);
   border-radius: 6px;
   padding: 8px 16px;
   font-size: 14px;
@@ -485,6 +485,24 @@ fieldset legend {
   font-weight: 700;
   color: var(--texto);
   white-space: nowrap;
+}
+
+.marca-textos {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.link-sobre-interno {
+  font-size: 11px;
+  color: var(--texto-suave);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.link-sobre-interno:hover {
+  color: var(--destaque);
+  text-decoration: underline;
 }
 
 .header-login {
@@ -683,17 +701,28 @@ fieldset legend {
   width: auto;
 }
 
-/* ===== Link "Sobre" na landing page ===== */
-.link-sobre {
-  display: block;
-  margin-top: 18px;
-  color: rgba(255, 255, 255, 0.75);
-  font-size: 14px;
+/* ===== Chip "Sobre" na landing page ===== */
+.chip-sobre {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 10;
+  color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
   text-decoration: none;
+  backdrop-filter: blur(4px);
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease;
 }
-.link-sobre:hover {
-  color: #ffffff;
-  text-decoration: underline;
+.chip-sobre:hover {
+  background-color: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.6);
 }
 
 /* ===== Página Sobre ===== */
