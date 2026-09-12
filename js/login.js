@@ -37,6 +37,7 @@ form.addEventListener("submit", function (evento) {
           return response.json();
         })
         .then(function (usuario) {
+          localStorage.setItem("perfil", usuario.perfil);
           if (usuario.perfil === "TI") {
             window.location.href = "painel-ti.html";
           } else {

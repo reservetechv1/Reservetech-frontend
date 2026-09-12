@@ -738,14 +738,19 @@ fieldset legend {
   color: #1a1a1a;
   font-size: 22px;
 }
-.link-voltar {
+.link-voltar-sobre {
+  display: inline-block;
   color: #4a90d9;
   text-decoration: none;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 15px;
+  border: 1.5px solid #4a90d9;
+  border-radius: 6px;
+  padding: 8px 16px;
 }
-.link-voltar:hover {
-  text-decoration: underline;
+.link-voltar-sobre:hover {
+  background-color: #4a90d9;
+  color: #ffffff;
 }
 
 .container-sobre {

@@ -7,6 +7,7 @@ function logout(mensagem) {
   localStorage.removeItem("token");
   localStorage.removeItem("loginTimestamp");
   localStorage.removeItem("ultimaAtividade");
+  localStorage.removeItem("perfil");
 
   if (mensagem) {
     sessionStorage.setItem("mensagemLogin", mensagem);
