@@ -56,9 +56,19 @@ function criarCardUsuario(usuario) {
     }
   });
 
+  const btnRedefinirSenha = document.createElement("button");
+  btnRedefinirSenha.textContent = "Redefinir senha";
+  btnRedefinirSenha.className = "btn-neutro";
+  btnRedefinirSenha.style.width = "auto";
+  btnRedefinirSenha.style.padding = "6px 12px";
+  btnRedefinirSenha.addEventListener("click", function () {
+    abrirRedefinirSenha(card, usuario);
+  });
+
   card.appendChild(document.createElement("br"));
   card.appendChild(btnEditar);
   card.appendChild(btnDeletar);
+  card.appendChild(btnRedefinirSenha);
 
   return card;
 }
@@ -129,6 +139,76 @@ function abrirEdicao(card, usuario) {
     card.appendChild(el);
     card.appendChild(document.createElement("br"));
   });
+}
+
+function abrirRedefinirSenha(card, usuario) {
+  card.innerHTML =
+    "<strong style='font-size:15px;'>Redefinir senha de: " +
+    usuario.nome +
+    "</strong><br><br>";
+
+  const aviso = document.createElement("p");
+  aviso.style.cssText = "font-size:13px; margin-bottom:10px;";
+  aviso.textContent =
+    "Defina uma senha temporária e repasse para " +
+    usuario.nome +
+    " por fora do sistema (WhatsApp, e-mail, etc.).";
+  card.appendChild(aviso);
+
+  const inputSenha = document.createElement("input");
+  inputSenha.type = "text";
+  inputSenha.placeholder = "Nova senha (mínimo 6 caracteres)";
+
+  card.appendChild(criarCampoUsuario("Nova senha", inputSenha));
+
+  const divBotoes = document.createElement("div");
+  divBotoes.style.cssText = "display:flex; gap:8px; margin-top:12px;";
+
+  const btnSalvar = document.createElement("button");
+  btnSalvar.textContent = "Redefinir";
+  btnSalvar.className = "btn-submit";
+  btnSalvar.style.cssText = "width:auto; padding:8px 20px;";
+  btnSalvar.addEventListener("click", function () {
+    if (inputSenha.value.length < 6) {
+      alert("A senha deve ter pelo menos 6 caracteres.");
+      return;
+    }
+    redefinirSenha(usuario.id, inputSenha.value);
+  });
+
+  const btnCancelar = document.createElement("button");
+  btnCancelar.textContent = "Cancelar";
+  btnCancelar.className = "btn-cancelar";
+  btnCancelar.addEventListener("click", carregarUsuarios);
+
+  divBotoes.appendChild(btnSalvar);
+  divBotoes.appendChild(btnCancelar);
+  card.appendChild(divBotoes);
+}
+
+function redefinirSenha(id, novaSenha) {
+  fetch(API + "/usuarios/" + id + "/redefinir-senha", {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify({ novaSenha: novaSenha }),
+  })
+    .then(function (response) {
+      if (!response.ok) {
+        return response.json().then(function (erro) {
+          throw new Error(erro.mensagem || "Erro ao redefinir senha.");
+        });
+      }
+      alert(
+        "Senha redefinida com sucesso. Repasse a nova senha para o usuário.",
+      );
+      carregarUsuarios();
+    })
+    .catch(function (erro) {
+      alert(erro.message);
+    });
 }
 
 function salvarEdicao(id, dados) {
