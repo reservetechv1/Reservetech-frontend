@@ -505,6 +505,65 @@ fieldset legend {
   text-decoration: underline;
 }
 
+/* ===== RESPONSIVIDADE - CABEÇALHO EM TELAS PEQUENAS ===== */
+@media (max-width: 640px) {
+  header {
+    padding: 14px 16px;
+  }
+
+  .header-com-acao {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+
+  .marca-header {
+    order: 1;
+    gap: 8px;
+  }
+
+  .marca-logo {
+    height: 30px;
+    padding: 3px 6px;
+  }
+
+  .marca-nome {
+    font-size: 14px;
+  }
+
+  .link-sobre-interno {
+    font-size: 10px;
+  }
+
+  .header-com-acao h1 {
+    order: 3;
+    width: 100%;
+    font-size: 19px;
+    text-align: left;
+    margin-top: 2px;
+  }
+
+  .header-acoes {
+    order: 2;
+    gap: 6px;
+  }
+
+  #timer-sessao {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  .btn-logout {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  .btn-tema {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+}
+
 .header-login {
   display: flex;
   justify-content: space-between;
