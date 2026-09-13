@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>ReserveTech - Esqueci minha senha</title>
+  </head>
+  <body>
+    <header class="header-login">
+      <div class="marca-header">
+        <img
+          src="img/logo_fsaa.png"
+          alt="Logo da faculdade"
+          class="marca-logo"
+        /><span class="marca-nome">ReserveTech</span>
+      </div>
+      <button
+        class="btn-tema"
+        onclick="alternarTema()"
+        title="Alternar tema"
+      ></button>
+    </header>
+
+    <main>
+      <div class="container-coleta-formulario">
+        <a href="login.html" class="link-voltar">Voltar para o login</a>
+
+        <h2>Esqueci minha senha</h2>
+
+        <p class="texto-instrucao">
+          Por segurança, o ReserveTech não guarda nem recupera senhas
+          automaticamente. Para redefinir a sua, envie um e-mail para o TI da
+          faculdade usando o modelo abaixo, assim conseguimos identificar você e
+          alterar sua senha.
+        </p>
+
+        <div class="coleta-dados bloco-email-ti">
+          <label>E-mail do TI</label>
+          <div class="linha-copia">
+            <a href="mailto:ti@fsaa.edu.br">ti@fsaa.edu.br</a>
+            <button type="button" id="btn-copiar-email-ti" class="btn-neutro">
+              Copiar e-mail
+            </button>
+          </div>
+        </div>
+
+        <label class="rotulo-secao">Modelo do e-mail a enviar</label>
+        <div class="modelo-email" id="modelo-email">
+          Para: ti@fsaa.edu.br Assunto: Esqueci minha senha - ReserveTech Nome
+          completo: [seu nome completo] E-mail de login: [seu e-mail cadastrado
+          no ReserveTech] Olá, esqueci minha senha de acesso ao ReserveTech.
+          Seguem meus dados acima para identificação.
+        </div>
+
+        <div class="linha-copia">
+          <button type="button" id="btn-copiar-modelo" class="btn-neutro">
+            Copiar modelo
+          </button>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/tema.js"></script>
+    <script>
+      function copiarTexto(texto, mensagemSucesso) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard
+            .writeText(texto)
+            .then(function () {
+              alert(mensagemSucesso);
+            })
+            .catch(function () {
+              alert(
+                "Não foi possível copiar automaticamente. Selecione o texto manualmente.",
+              );
+            });
+        } else {
+          alert(
+            "Não foi possível copiar automaticamente. Selecione o texto manualmente.",
+          );
+        }
+      }
+
+      const btnCopiarEmailTi = document.querySelector("#btn-copiar-email-ti");
+      if (btnCopiarEmailTi) {
+        btnCopiarEmailTi.addEventListener("click", function () {
+          copiarTexto("ti@fsaa.edu.br", "E-mail copiado: ti@fsaa.edu.br");
+        });
+      }
+
+      const btnCopiarModelo = document.querySelector("#btn-copiar-modelo");
+      if (btnCopiarModelo) {
+        btnCopiarModelo.addEventListener("click", function () {
+          const modelo = document
+            .querySelector("#modelo-email")
+            .textContent.trim();
+          copiarTexto(modelo, "Modelo copiado! Cole no seu e-mail.");
+        });
+      }
+    </script>
+  </body>
+</html>
