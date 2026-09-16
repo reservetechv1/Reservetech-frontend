@@ -2,7 +2,7 @@ const token = localStorage.getItem("token");
 const listaSalas = document.querySelector("#lista-salas");
 
 function carregarSalas() {
-  fetch(API + "/salas", {
+  fetch(API + "/salas?size=500&sort=nome", {
     headers: { Authorization: "Bearer " + token },
   })
     .then(function (response) {
@@ -97,7 +97,7 @@ function abrirEdicao(card, sala) {
 
   const btnCancelar = document.createElement("button");
   btnCancelar.textContent = "Cancelar";
-  btnCancelar.className = "btn-secundario";
+  btnCancelar.className = "btn-cancelar";
   btnCancelar.addEventListener("click", carregarSalas);
 
   divBotoes.appendChild(btnSalvar);

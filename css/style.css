@@ -668,6 +668,34 @@ fieldset legend {
   min-height: 18px;
 }
 
+/* ===== CADASTRO EM LOTE (várias linhas de uma vez) ===== */
+.linha-multipla {
+  border: 1px solid var(--linha);
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: flex-end;
+}
+
+.linha-multipla .coleta-dados {
+  flex: 1;
+  min-width: 140px;
+  margin-bottom: 0;
+}
+
+.linha-multipla .btn-remover-item {
+  flex-shrink: 0;
+  align-self: center;
+}
+
+.linha-multipla .mensagem-erro {
+  width: 100%;
+  margin-top: 2px;
+}
+
 /* ===== LINK AUXILIAR ===== */
 .link-auxiliar {
   margin-top: 16px;
@@ -729,8 +757,8 @@ fieldset legend {
 
 #btn-copiar-modelo {
   width: auto;
-  padding: 7px 16px;
-  font-size: 14px;
+  padding: 5px 12px;
+  font-size: 13px;
 }
 
 /* ===== PÁGINA DE CADASTRO ===== */

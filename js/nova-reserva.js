@@ -9,7 +9,9 @@ const mensagemErro = document.querySelector("#erro-reserva");
 
 let dispositivosDisponiveis = [];
 
-fetch(API + "/salas", { headers: { Authorization: "Bearer " + token } })
+fetch(API + "/salas?size=500&sort=nome", {
+  headers: { Authorization: "Bearer " + token },
+})
   .then((r) => r.json())
   .then(function (pagina) {
     selectSala.innerHTML =
@@ -47,7 +49,9 @@ fetch(API + "/periodos", { headers: { Authorization: "Bearer " + token } })
     });
   });
 
-fetch(API + "/dispositivos", { headers: { Authorization: "Bearer " + token } })
+fetch(API + "/dispositivos?size=500&sort=nome", {
+  headers: { Authorization: "Bearer " + token },
+})
   .then((r) => r.json())
   .then(function (pagina) {
     dispositivosDisponiveis = pagina.content;

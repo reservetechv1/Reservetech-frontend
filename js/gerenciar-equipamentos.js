@@ -2,7 +2,7 @@ const token = localStorage.getItem("token");
 const listaEquipamentos = document.querySelector("#lista-equipamentos");
 
 function carregarEquipamentos() {
-  fetch(API + "/dispositivos", {
+  fetch(API + "/dispositivos?size=500&sort=nome", {
     headers: { Authorization: "Bearer " + token },
   })
     .then(function (response) {

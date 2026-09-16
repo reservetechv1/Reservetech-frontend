@@ -31,53 +31,30 @@
         <a href="painel-ti.html" class="link-voltar">Voltar para o Painel</a>
 
         <h2>Cadastrar Equipamento</h2>
+        <p
+          style="
+            font-size: 13px;
+            color: var(--texto-suave);
+            margin-bottom: 12px;
+          "
+        >
+          Adicione quantos equipamentos quiser antes de salvar.
+        </p>
 
         <form id="form-equipamento">
-          <div class="coleta-dados">
-            <label for="nome">Nome</label>
-            <input
-              type="text"
-              id="nome"
-              name="nome"
-              placeholder="Ex: Projetor Epson"
-              required
-            />
-          </div>
+          <div id="lista-equipamentos-form"></div>
 
-          <div class="coleta-dados">
-            <label for="descricao">Descrição</label>
-            <input
-              type="text"
-              id="descricao"
-              name="descricao"
-              placeholder="Ex: Projetor portátil HD"
-            />
-          </div>
-
-          <div class="coleta-dados">
-            <label for="quantidade">Quantidade Disponível</label>
-            <input
-              type="number"
-              id="quantidade"
-              name="quantidade"
-              min="0"
-              value="1"
-              required
-            />
-          </div>
-
-          <div class="coleta-dados">
-            <label for="status">Status</label>
-            <select id="status" name="status" required>
-              <option value="DISPONIVEL">Disponível</option>
-              <option value="EM_USO">Em uso</option>
-              <option value="EM_MANUTENCAO">Em manutenção</option>
-            </select>
-          </div>
+          <button
+            type="button"
+            id="btn-adicionar-equipamento"
+            class="btn-secundario"
+          >
+            + Adicionar outro equipamento
+          </button>
 
           <span id="erro-equipamento" class="mensagem-erro"></span>
 
-          <button type="submit" class="btn-submit">Salvar Equipamento</button>
+          <button type="submit" class="btn-submit">Salvar Equipamentos</button>
         </form>
       </div>
     </main>

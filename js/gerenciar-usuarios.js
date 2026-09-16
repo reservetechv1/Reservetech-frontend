@@ -2,7 +2,7 @@ const token = localStorage.getItem("token");
 const listaUsuarios = document.querySelector("#lista-usuarios");
 
 function carregarUsuarios() {
-  fetch(API + "/usuarios", {
+  fetch(API + "/usuarios?size=500&sort=nome", {
     headers: { Authorization: "Bearer " + token },
   })
     .then(function (response) {
