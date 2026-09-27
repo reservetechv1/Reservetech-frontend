@@ -16,7 +16,10 @@
         />
         <div class="marca-textos">
           <span class="marca-nome">ReserveTech</span
-          ><a href="sobre.html" class="link-sobre-interno">Sobre o projeto</a>
+          ><a href="sobre.html" class="link-sobre-interno">Sobre o projeto</a
+          ><a href="trocar-senha.html" class="link-sobre-interno"
+            >Trocar minha senha</a
+          >
         </div>
       </div>
       <h1>Painel TI</h1>
@@ -54,14 +57,16 @@
             <a href="gerenciar-usuarios.html" class="botao-painel"
               >Gerenciar Usuários</a
             >
-            <a href="relatorios.html" class="botao-painel botao-central"
-              >Relatórios</a
-            >
+            <a href="relatorios.html" class="botao-painel">Relatórios</a>
+            <a href="backups.html" class="botao-painel">Backups</a>
           </div>
         </div>
 
         <div class="secao-painel">
-          <h3>Todas as Reservas</h3>
+          <h3>
+            Todas as Reservas
+            <span id="contador-pendentes" class="contador-pendentes"></span>
+          </h3>
           <div class="barra-acoes">
             <div class="filtro-periodo">
               <label for="filtro-status">Status:</label>

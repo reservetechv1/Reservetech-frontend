@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
+    <title>ReserveTech - Backups</title>
+  </head>
+  <body>
+    <header class="header-com-acao">
+      <div class="marca-header"><img src="img/logo_fsaa.png" alt="Logo da faculdade" class="marca-logo" /><div class="marca-textos"><span class="marca-nome">ReserveTech</span><a href="sobre.html" class="link-sobre-interno">Sobre o projeto</a><a href="trocar-senha.html" class="link-sobre-interno">Trocar minha senha</a></div></div>
+      <h1>Painel TI</h1>
+      <div class="header-acoes">
+        <button class="btn-tema" onclick="alternarTema()" title="Alternar tema"></button>
+        <span id="timer-sessao" title="Tempo restante da sessão"></span>
+        <button id="btn-logout" class="btn-logout">Sair</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="container-coleta-formulario">
+        <a href="painel-ti.html" class="link-voltar">Voltar para o Painel</a>
+
+        <h2>Backups</h2>
+
+        <p class="texto-instrucao">
+          O sistema guarda uma cópia dos dados (usuários, salas,
+          equipamentos e reservas) automaticamente toda semana. Os 8
+          backups mais recentes ficam disponíveis para download; os mais
+          antigos são apagados sozinhos.
+        </p>
+
+        <button type="button" id="btn-gerar-backup" class="btn-secundario">
+          Gerar backup agora
+        </button>
+
+        <div id="lista-backups" style="margin-top: 16px"></div>
+      </div>
+    </main>
+
+    <script src="js/config.js"></script>
+    <script src="js/tema.js"></script>
+    <script src="js/logout.js"></script>
+    <script src="js/backups.js"></script>
+  </body>
+</html>

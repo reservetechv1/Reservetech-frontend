@@ -13,7 +13,14 @@
           src="img/logo_fsaa.png"
           alt="Logo da faculdade"
           class="marca-logo"
-        /><span class="marca-nome">ReserveTech</span>
+        />
+        <div class="marca-textos">
+          <span class="marca-nome">ReserveTech</span
+          ><a href="sobre.html" class="link-sobre-interno">Sobre o projeto</a
+          ><a href="trocar-senha.html" class="link-sobre-interno"
+            >Trocar minha senha</a
+          >
+        </div>
       </div>
       <h1>Painel TI</h1>
       <div class="header-acoes">
@@ -31,6 +38,29 @@
         <a href="painel-ti.html" class="link-voltar">Voltar para o Painel</a>
 
         <h2>Gerenciar Usuários</h2>
+
+        <div class="barra-selecao">
+          <label class="opcao-checkbox">
+            <input type="checkbox" id="check-selecionar-todos" />
+            Selecionar todos
+          </label>
+          <div class="barra-selecao-acoes">
+            <button
+              type="button"
+              id="btn-desativar-selecionados"
+              class="btn-cancelar"
+            >
+              Desativar selecionados
+            </button>
+            <button
+              type="button"
+              id="btn-ativar-selecionados"
+              class="btn-confirmar"
+            >
+              Ativar selecionados
+            </button>
+          </div>
+        </div>
 
         <div id="lista-usuarios"></div>
       </div>

@@ -350,3 +350,33 @@ filtroStatus.addEventListener("change", function () {
 });
 
 carregarReservas("todas");
+
+// ===== Contador de reservas pendentes =====
+const contadorPendentes = document.querySelector("#contador-pendentes");
+
+function carregarContagemPendentes() {
+  fetch(API + "/reservas/contagem-pendentes", {
+    headers: { Authorization: "Bearer " + token },
+  })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (total) {
+      if (total > 0) {
+        contadorPendentes.textContent =
+          total + " pendente" + (total > 1 ? "s" : "");
+        contadorPendentes.style.display = "inline-block";
+      } else {
+        contadorPendentes.style.display = "none";
+      }
+    });
+}
+
+carregarContagemPendentes();
+
+// ===== Atualização automática (a cada 25s) =====
+// Assim o TI não precisa ficar dando F5 pra ver reservas novas
+setInterval(function () {
+  carregarReservas(filtroStatus.value);
+  carregarContagemPendentes();
+}, 25000);

@@ -1,5 +1,12 @@
 const token = localStorage.getItem("token");
 const listaUsuarios = document.querySelector("#lista-usuarios");
+const checkSelecionarTodos = document.querySelector("#check-selecionar-todos");
+const btnDesativarSelecionados = document.querySelector(
+  "#btn-desativar-selecionados",
+);
+const btnAtivarSelecionados = document.querySelector(
+  "#btn-ativar-selecionados",
+);
 
 function carregarUsuarios() {
   fetch(API + "/usuarios?size=500&sort=nome", {
@@ -10,6 +17,7 @@ function carregarUsuarios() {
     })
     .then(function (pagina) {
       listaUsuarios.innerHTML = "";
+      checkSelecionarTodos.checked = false;
 
       if (pagina.content.length === 0) {
         listaUsuarios.innerHTML = "<p>Nenhum usuário cadastrado.</p>";
@@ -24,17 +32,36 @@ function carregarUsuarios() {
 
 function criarCardUsuario(usuario) {
   const card = document.createElement("div");
-  card.className = "card-reserva";
+  card.className =
+    "card-reserva card-usuario" +
+    (usuario.ativo ? "" : " card-usuario-inativo");
 
   const perfilTexto = usuario.perfil === "PROFESSOR" ? "Professor" : "TI";
+  const statusTexto = usuario.ativo ? "Ativo" : "Desativado";
 
-  card.innerHTML =
+  const topo = document.createElement("div");
+  topo.className = "card-usuario-topo";
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.className = "check-usuario";
+  checkbox.dataset.id = usuario.id;
+
+  const infoTexto = document.createElement("span");
+  infoTexto.innerHTML =
     "<strong>" +
     usuario.nome +
     "</strong> — " +
     usuario.email +
     "<br>Perfil: " +
-    perfilTexto;
+    perfilTexto +
+    " · Status: <strong>" +
+    statusTexto +
+    "</strong>";
+
+  topo.appendChild(checkbox);
+  topo.appendChild(infoTexto);
+  card.appendChild(topo);
 
   const btnEditar = document.createElement("button");
   btnEditar.textContent = "Editar";
@@ -45,16 +72,30 @@ function criarCardUsuario(usuario) {
     abrirEdicao(card, usuario);
   });
 
-  const btnDeletar = document.createElement("button");
-  btnDeletar.textContent = "Excluir";
-  btnDeletar.className = "btn-remover-item";
-  btnDeletar.style.width = "auto";
-  btnDeletar.style.padding = "6px 12px";
-  btnDeletar.addEventListener("click", function () {
-    if (confirm("Tem certeza que deseja excluir esse usuário?")) {
-      deletarUsuario(usuario.id);
-    }
-  });
+  const btnStatus = document.createElement("button");
+  btnStatus.style.width = "auto";
+  btnStatus.style.padding = "6px 12px";
+  if (usuario.ativo) {
+    btnStatus.textContent = "Desativar";
+    btnStatus.className = "btn-cancelar";
+    btnStatus.addEventListener("click", function () {
+      if (
+        confirm(
+          "Desativar " +
+            usuario.nome +
+            "? A pessoa não vai mais conseguir logar, mas o histórico dela é mantido.",
+        )
+      ) {
+        alterarStatus(usuario.id, "desativar");
+      }
+    });
+  } else {
+    btnStatus.textContent = "Ativar";
+    btnStatus.className = "btn-confirmar";
+    btnStatus.addEventListener("click", function () {
+      alterarStatus(usuario.id, "ativar");
+    });
+  }
 
   const btnRedefinirSenha = document.createElement("button");
   btnRedefinirSenha.textContent = "Redefinir senha";
@@ -65,9 +106,8 @@ function criarCardUsuario(usuario) {
     abrirRedefinirSenha(card, usuario);
   });
 
-  card.appendChild(document.createElement("br"));
   card.appendChild(btnEditar);
-  card.appendChild(btnDeletar);
+  card.appendChild(btnStatus);
   card.appendChild(btnRedefinirSenha);
 
   return card;
@@ -134,11 +174,6 @@ function abrirEdicao(card, usuario) {
   divBotoes.appendChild(btnSalvar);
   divBotoes.appendChild(btnCancelar);
   card.appendChild(divBotoes);
-
-  [].forEach(function (el) {
-    card.appendChild(el);
-    card.appendChild(document.createElement("br"));
-  });
 }
 
 function abrirRedefinirSenha(card, usuario) {
@@ -233,20 +268,17 @@ function salvarEdicao(id, dados) {
     });
 }
 
-function deletarUsuario(id) {
-  fetch(API + "/usuarios/" + id, {
-    method: "DELETE",
+function alterarStatus(id, acao) {
+  fetch(API + "/usuarios/" + id + "/" + acao, {
+    method: "PATCH",
     headers: { Authorization: "Bearer " + token },
   })
     .then(function (response) {
       if (!response.ok) {
-        if (response.status === 500 || response.status === 409) {
+        return response.json().then(function (erro) {
           throw new Error(
-            "Este usuário não pode ser excluído porque já possui reservas vinculadas.",
+            erro.mensagem || "Erro ao alterar status do usuário.",
           );
-        }
-        return response.json().then((erro) => {
-          throw new Error(erro.mensagem || "Erro ao excluir usuário.");
         });
       }
       carregarUsuarios();
@@ -255,5 +287,62 @@ function deletarUsuario(id) {
       alert(erro.message);
     });
 }
+
+function idsSelecionados() {
+  return Array.from(document.querySelectorAll(".check-usuario:checked")).map(
+    function (c) {
+      return Number(c.dataset.id);
+    },
+  );
+}
+
+function alterarStatusVarios(acao) {
+  const ids = idsSelecionados();
+  if (ids.length === 0) {
+    alert("Selecione ao menos um usuário.");
+    return;
+  }
+  const mensagemConfirmacao =
+    acao === "desativar-varios"
+      ? "Desativar " + ids.length + " usuário(s) selecionado(s)?"
+      : "Ativar " + ids.length + " usuário(s) selecionado(s)?";
+  if (acao === "desativar-varios" && !confirm(mensagemConfirmacao)) return;
+
+  fetch(API + "/usuarios/" + acao, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify(ids),
+  })
+    .then(function (response) {
+      if (!response.ok) {
+        return response.json().then(function (erro) {
+          throw new Error(
+            erro.mensagem || "Erro ao alterar os usuários selecionados.",
+          );
+        });
+      }
+      carregarUsuarios();
+    })
+    .catch(function (erro) {
+      alert(erro.message);
+    });
+}
+
+checkSelecionarTodos.addEventListener("change", function () {
+  document.querySelectorAll(".check-usuario").forEach(function (c) {
+    c.checked = checkSelecionarTodos.checked;
+  });
+});
+
+btnDesativarSelecionados.addEventListener("click", function () {
+  alterarStatusVarios("desativar-varios");
+});
+
+btnAtivarSelecionados.addEventListener("click", function () {
+  alterarStatusVarios("ativar-varios");
+});
 
 carregarUsuarios();
