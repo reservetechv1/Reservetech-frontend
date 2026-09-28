@@ -106,9 +106,27 @@ function criarCardUsuario(usuario) {
     abrirRedefinirSenha(card, usuario);
   });
 
+  const btnExcluir = document.createElement("button");
+  btnExcluir.textContent = "Excluir";
+  btnExcluir.className = "btn-remover-item";
+  btnExcluir.style.width = "auto";
+  btnExcluir.style.padding = "6px 12px";
+  btnExcluir.addEventListener("click", function () {
+    if (
+      confirm(
+        "Excluir " +
+          usuario.nome +
+          " definitivamente? Isso só funciona se o usuário não tiver nenhuma reserva feita. Se ele já usou o sistema, use Desativar em vez disso.",
+      )
+    ) {
+      excluirUsuario(usuario.id);
+    }
+  });
+
   card.appendChild(btnEditar);
   card.appendChild(btnStatus);
   card.appendChild(btnRedefinirSenha);
+  card.appendChild(btnExcluir);
 
   return card;
 }
@@ -279,6 +297,24 @@ function alterarStatus(id, acao) {
           throw new Error(
             erro.mensagem || "Erro ao alterar status do usuário.",
           );
+        });
+      }
+      carregarUsuarios();
+    })
+    .catch(function (erro) {
+      alert(erro.message);
+    });
+}
+
+function excluirUsuario(id) {
+  fetch(API + "/usuarios/" + id, {
+    method: "DELETE",
+    headers: { Authorization: "Bearer " + token },
+  })
+    .then(function (response) {
+      if (!response.ok) {
+        return response.json().then(function (erro) {
+          throw new Error(erro.mensagem || "Erro ao excluir usuário.");
         });
       }
       carregarUsuarios();
