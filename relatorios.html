@@ -4,93 +4,128 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="css/style.css" />
-    <title>ReserveTech - Nova Reserva</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <title>ReserveTech - Relatórios</title>
   </head>
   <body>
     <header class="header-com-acao">
-      <div class="marca-header">
-        <img
-          src="img/logo_fsaa.png"
-          alt="Logo da faculdade"
-          class="marca-logo"
-        />
-        <div class="marca-textos">
-          <span class="marca-nome">ReserveTech</span
-          ><a href="sobre.html" class="link-sobre-interno">Sobre o projeto</a
-          ><a href="trocar-senha.html" class="link-sobre-interno"
-            >Trocar minha senha</a
-          >
-        </div>
-      </div>
-      <h1>Reservas</h1>
-      <div class="header-acoes">
-        <button
-          class="btn-tema"
-          onclick="alternarTema()"
-          title="Alternar tema"
-        ></button>
-        <span id="timer-sessao" title="Tempo restante da sessão"></span>
-      </div>
+      <h1>ReserveTech — Relatórios</h1>
+      <span id="timer-sessao" title="Tempo restante da sessão"></span>
+      <button id="btn-logout" class="btn-logout">Sair</button>
     </header>
 
     <main>
-      <div class="container-coleta-formulario">
-        <a href="reservas.html" class="link-voltar"
-          >Voltar para Minhas Reservas</a
+      <div class="container-coleta-formulario" style="max-width: 800px">
+        <a href="painel-ti.html" class="link-voltar">Voltar para o Painel</a>
+        <h2>Relatórios Gerenciais</h2>
+
+        <div class="barra-acoes">
+          <div class="filtro-periodo">
+            <label for="tipo-relatorio">Selecione o Relatório:</label>
+            <select id="tipo-relatorio">
+              <option value="selecione" selected disabled>Selecione...</option>
+              <option value="reservas-todas">Todas as Reservas</option>
+              <option value="reservas-professor">Reservas por Professor</option>
+              <option value="dispositivos-todos">Todos os Dispositivos</option>
+              <option value="dispositivos-manutencao">
+                Dispositivos em Manutenção
+              </option>
+            </select>
+          </div>
+        </div>
+
+        <div
+          id="filtro-data-container"
+          style="display: none; margin-bottom: 20px"
         >
+          <label for="input-data-relatorio" style="font-weight: 600"
+            >Filtrar por dia:</label
+          >
+          <input
+            type="date"
+            id="input-data-relatorio"
+            style="
+              padding: 6px 10px;
+              border: 1px solid #ccc;
+              border-radius: 6px;
+              margin-right: 10px;
+            "
+          />
+          <button
+            id="btn-buscar-data"
+            class="btn-submit"
+            style="margin-top: 0; padding: 6px 12px"
+          >
+            Buscar
+          </button>
+          <button
+            id="btn-limpar-data"
+            class="btn-neutro"
+            style="margin-top: 0; padding: 6px 12px"
+          >
+            Ver Todas
+          </button>
+        </div>
 
-        <h2>Nova Reserva</h2>
+        <div
+          id="filtro-professor-container"
+          style="display: none; margin-bottom: 20px"
+        >
+          <label for="select-professor" style="font-weight: 600"
+            >Professor:</label
+          >
+          <select
+            id="select-professor"
+            style="
+              padding: 6px 10px;
+              border: 1px solid #ccc;
+              border-radius: 6px;
+              margin-right: 10px;
+            "
+          >
+            <option value="">Carregando professores...</option>
+          </select>
+          <button
+            id="btn-buscar-professor"
+            class="btn-submit"
+            style="margin-top: 0; padding: 6px 12px"
+          >
+            Buscar
+          </button>
+        </div>
 
-        <form id="form-reserva">
-          <div class="coleta-dados">
-            <label for="sala">Sala</label>
-            <select id="sala" name="sala" required>
-              <option value="" disabled selected>Carregando salas...</option>
-            </select>
-          </div>
+        <div
+          id="container-exportacao"
+          style="
+            display: none;
+            margin-bottom: 20px;
+            gap: 10px;
+            justify-content: flex-end;
+          "
+        >
+          <button
+            id="btn-exportar-pdf"
+            class="btn-submit"
+            style="background-color: #dc3545; margin-top: 0"
+          >
+            Baixar PDF
+          </button>
+          <button
+            id="btn-exportar-csv"
+            class="btn-submit"
+            style="background-color: #28a745; margin-top: 0"
+          >
+            Baixar Planilha
+          </button>
+        </div>
 
-          <div class="coleta-dados">
-            <label for="data">Data</label>
-            <input type="date" id="data" name="data" required />
-          </div>
-
-          <div class="coleta-dados">
-            <label for="horario-inicio">Horário de Início</label>
-            <select id="horario-inicio" name="horarioInicio" required>
-              <option value="" disabled selected>Carregando...</option>
-            </select>
-          </div>
-
-          <div class="coleta-dados">
-            <label for="horario-fim">Horário de Fim</label>
-            <select id="horario-fim" name="horarioFim" required>
-              <option value="" disabled selected>Carregando...</option>
-            </select>
-          </div>
-
-          <div class="coleta-dados">
-            <label>Dispositivos</label>
-            <div id="lista-itens"></div>
-            <button
-              type="button"
-              id="btn-adicionar-item"
-              class="btn-secundario"
-            >
-              + Adicionar dispositivo
-            </button>
-          </div>
-
-          <span id="erro-reserva" class="mensagem-erro"></span>
-
-          <button type="submit" class="btn-submit">Criar Reserva</button>
-        </form>
+        <div id="area-resultado-relatorio">
+          <p>Selecione um relatório no menu acima para visualizar os dados.</p>
+        </div>
       </div>
     </main>
 
-    <script src="js/config.js"></script>
-    <script src="js/tema.js"></script>
-
     <script src="js/logout.js"></script>
-    <script src="js/nova-reserva.js"></script>
+    <script src="js/relatorios.js"></script>
   </body>
 </html>
