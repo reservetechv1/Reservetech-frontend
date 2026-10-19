@@ -91,6 +91,7 @@ form.addEventListener("submit", function (evento) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
       },
       body: JSON.stringify(usuario),
     }).then(function (response) {
@@ -132,7 +133,7 @@ form.addEventListener("submit", function (evento) {
         sucesso +
         " usuário(s) cadastrado(s) com sucesso. " +
         falhas +
-        " com erro — corrija abaixo e salve novamente.";
+        " com erro, corrija abaixo e salve novamente.";
       if (listaUsuariosForm.children.length === 0) {
         criarLinhaUsuario();
       }
