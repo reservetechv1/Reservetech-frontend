@@ -39,6 +39,16 @@
 
         <h2>Gerenciar Usuários</h2>
 
+        <div class="coleta-dados campo-busca-usuarios">
+          <input
+            type="search"
+            id="busca-usuarios"
+            placeholder="Buscar por nome ou e-mail"
+            autocomplete="off"
+          />
+          <span id="contador-usuarios" class="contador-usuarios"></span>
+        </div>
+
         <div class="barra-selecao">
           <label class="opcao-checkbox">
             <input type="checkbox" id="check-selecionar-todos" />
@@ -63,6 +73,9 @@
         </div>
 
         <div id="lista-usuarios"></div>
+        <p id="sem-resultados" class="sem-resultados" hidden>
+          Nenhum usuário encontrado para essa busca.
+        </p>
       </div>
     </main>
 

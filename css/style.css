@@ -388,8 +388,26 @@ fieldset legend {
 
 .barra-selecao-acoes button {
   width: auto;
-  padding: 7px 14px;
+  min-width: 170px;
+  margin: 0;
+  padding: 8px 16px;
   font-size: 13px;
+  font-weight: bold;
+}
+
+.campo-busca-usuarios {
+  margin-bottom: 12px;
+}
+
+.contador-usuarios {
+  font-size: 13px;
+  color: var(--texto-suave);
+}
+
+.sem-resultados {
+  color: var(--texto-suave);
+  font-size: 14px;
+  padding: 8px 0;
 }
 
 .card-usuario-topo {

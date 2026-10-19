@@ -7,6 +7,46 @@ const btnDesativarSelecionados = document.querySelector(
 const btnAtivarSelecionados = document.querySelector(
   "#btn-ativar-selecionados",
 );
+const campoBusca = document.querySelector("#busca-usuarios");
+const contadorUsuarios = document.querySelector("#contador-usuarios");
+const semResultados = document.querySelector("#sem-resultados");
+
+// Tira acentos e deixa minúsculo, para "jose" achar "José"
+function normalizar(texto) {
+  return texto
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+function cardVisivel(card) {
+  return card.style.display !== "none";
+}
+
+function aplicarFiltro() {
+  const termo = normalizar(campoBusca.value.trim());
+  const cards = listaUsuarios.querySelectorAll(".card-usuario");
+  let visiveis = 0;
+
+  cards.forEach(function (card) {
+    const mostrar = !termo || card.dataset.busca.includes(termo);
+    card.style.display = mostrar ? "" : "none";
+    if (mostrar) {
+      visiveis++;
+    } else {
+      // desmarca quem ficou escondido, para a ação em lote nunca pegar
+      // usuários que a pessoa não está vendo
+      const check = card.querySelector(".check-usuario");
+      if (check) check.checked = false;
+    }
+  });
+
+  checkSelecionarTodos.checked = false;
+  semResultados.hidden = !(cards.length > 0 && visiveis === 0);
+  contadorUsuarios.textContent = termo
+    ? visiveis + " de " + cards.length + " usuários"
+    : cards.length + " usuários";
+}
 
 function carregarUsuarios() {
   fetch(API + "/usuarios?size=500&sort=nome", {
@@ -21,12 +61,14 @@ function carregarUsuarios() {
 
       if (pagina.content.length === 0) {
         listaUsuarios.innerHTML = "<p>Nenhum usuário cadastrado.</p>";
+        contadorUsuarios.textContent = "";
         return;
       }
 
       pagina.content.forEach(function (usuario) {
         listaUsuarios.appendChild(criarCardUsuario(usuario));
       });
+      aplicarFiltro(); // mantém a busca ativa depois de editar/ativar/desativar
     });
 }
 
@@ -35,6 +77,8 @@ function criarCardUsuario(usuario) {
   card.className =
     "card-reserva card-usuario" +
     (usuario.ativo ? "" : " card-usuario-inativo");
+
+  card.dataset.busca = normalizar(usuario.nome + " " + usuario.email);
 
   const perfilTexto = usuario.perfil === "PROFESSOR" ? "Professor" : "TI";
   const statusTexto = usuario.ativo ? "Ativo" : "Desativado";
@@ -325,11 +369,13 @@ function excluirUsuario(id) {
 }
 
 function idsSelecionados() {
-  return Array.from(document.querySelectorAll(".check-usuario:checked")).map(
-    function (c) {
+  return Array.from(document.querySelectorAll(".check-usuario:checked"))
+    .filter(function (c) {
+      return cardVisivel(c.closest(".card-usuario"));
+    })
+    .map(function (c) {
       return Number(c.dataset.id);
-    },
-  );
+    });
 }
 
 function alterarStatusVarios(acao) {
@@ -368,10 +414,14 @@ function alterarStatusVarios(acao) {
 }
 
 checkSelecionarTodos.addEventListener("change", function () {
+  // marca só quem está visível (respeita a busca)
   document.querySelectorAll(".check-usuario").forEach(function (c) {
-    c.checked = checkSelecionarTodos.checked;
+    c.checked =
+      checkSelecionarTodos.checked && cardVisivel(c.closest(".card-usuario"));
   });
 });
+
+campoBusca.addEventListener("input", aplicarFiltro);
 
 btnDesativarSelecionados.addEventListener("click", function () {
   alterarStatusVarios("desativar-varios");
