@@ -6,8 +6,31 @@ const listaItens = document.querySelector("#lista-itens");
 const btnAdicionarItem = document.querySelector("#btn-adicionar-item");
 const form = document.querySelector("#form-reserva");
 const mensagemErro = document.querySelector("#erro-reserva");
+const campoData = document.querySelector("#data");
+
+// Tem que ser o mesmo valor de reserva.dias-antecedencia-maximo no backend.
+// O backend é quem manda de verdade; aqui é só pra o calendário já bloquear.
+const DIAS_MAXIMOS_ANTECEDENCIA = 15;
 
 let dispositivosDisponiveis = [];
+
+function formatarDataLocal(data) {
+  return (
+    data.getFullYear() +
+    "-" +
+    String(data.getMonth() + 1).padStart(2, "0") +
+    "-" +
+    String(data.getDate()).padStart(2, "0")
+  );
+}
+
+const hojeCalendario = new Date();
+const limiteCalendario = new Date();
+limiteCalendario.setDate(
+  limiteCalendario.getDate() + DIAS_MAXIMOS_ANTECEDENCIA,
+);
+campoData.min = formatarDataLocal(hojeCalendario);
+campoData.max = formatarDataLocal(limiteCalendario);
 
 fetch(API + "/salas?size=500&sort=nome", {
   headers: { Authorization: "Bearer " + token },
@@ -120,6 +143,17 @@ form.addEventListener("submit", function (evento) {
 
   if (dataEscolhida < dataAtual) {
     mensagemErro.textContent = "Não é possível selecionar uma data no passado.";
+    return;
+  }
+
+  const dataLimite = new Date(dataAtual);
+  dataLimite.setDate(dataLimite.getDate() + DIAS_MAXIMOS_ANTECEDENCIA);
+
+  if (dataEscolhida > dataLimite) {
+    mensagemErro.textContent =
+      "Só é possível reservar com até " +
+      DIAS_MAXIMOS_ANTECEDENCIA +
+      " dias de antecedência.";
     return;
   }
 
