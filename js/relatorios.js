@@ -44,13 +44,9 @@ selectTipoRelatorio.addEventListener("change", function () {
     containerFiltroData.style.display = "none";
 
     if (tipo === "dispositivos-todos") {
-      carregarDispositivos(
-        API + "/dispositivos",
-      );
+      carregarDispositivos(API + "/dispositivos");
     } else if (tipo === "dispositivos-manutencao") {
-      carregarDispositivos(
-        API + "/dispositivos?status=EM_MANUTENCAO",
-      );
+      carregarDispositivos(API + "/dispositivos?status=EM_MANUTENCAO");
     }
   }
 });
@@ -64,9 +60,7 @@ btnBuscarData.addEventListener("click", function () {
 
   nomeRelatorioAtual = "Reservas do dia " + data.split("-").reverse().join("/");
   areaResultado.innerHTML = "<p>Carregando reservas...</p>";
-  carregarReservas(
-    API + "/reservas?data=" + data,
-  );
+  carregarReservas(API + "/reservas?data=" + data);
 });
 
 btnLimparData.addEventListener("click", function () {
@@ -88,9 +82,7 @@ btnBuscarProfessor.addEventListener("click", function () {
   nomeRelatorioAtual = "Reservas - " + nomeProfessorSelecionado;
 
   areaResultado.innerHTML = "<p>Carregando reservas...</p>";
-  carregarReservas(
-    API + "/reservas/usuario/" + professorId,
-  );
+  carregarReservas(API + "/reservas/usuario/" + professorId);
 });
 
 function carregarProfessores() {
@@ -144,13 +136,20 @@ function carregarReservas(url) {
         const card = document.createElement("div");
         card.className = "card-reserva";
 
-        const itensTexto = reserva.itens
-          .map(function (item) {
-            return (
-              item.nomeDispositivo + " (x" + item.quantidadeReservada + ")"
-            );
-          })
-          .join("<br>");
+        const itensTexto =
+          '<div class="chips-itens">' +
+          reserva.itens
+            .map(function (item) {
+              return (
+                '<span class="chip-item">' +
+                item.nomeDispositivo +
+                '<span class="chip-item-qtd">' +
+                item.quantidadeReservada +
+                "</span></span>"
+              );
+            })
+            .join("") +
+          "</div>";
 
         const dataFormatada = reserva.dataReserva
           .split("-")

@@ -69,11 +69,20 @@ function criarCard(reserva) {
   const card = document.createElement("div");
   card.className = "card-reserva";
 
-  const itensTexto = reserva.itens
-    .map(function (item) {
-      return item.nomeDispositivo + " (x" + item.quantidadeReservada + ")";
-    })
-    .join("<br>");
+  const itensTexto =
+    '<div class="chips-itens">' +
+    reserva.itens
+      .map(function (item) {
+        return (
+          '<span class="chip-item">' +
+          item.nomeDispositivo +
+          '<span class="chip-item-qtd">' +
+          item.quantidadeReservada +
+          "</span></span>"
+        );
+      })
+      .join("") +
+    "</div>";
 
   const dataFormatada = reserva.dataReserva.split("-").reverse().join("/");
 
@@ -126,13 +135,10 @@ function criarCard(reserva) {
 function cancelarReserva(id) {
   if (!confirm("Tem certeza que deseja cancelar esta reserva?")) return;
 
-  fetch(
-    API + "/reservas/" + id + "/cancelar",
-    {
-      method: "PATCH",
-      headers: { Authorization: "Bearer " + token },
-    },
-  )
+  fetch(API + "/reservas/" + id + "/cancelar", {
+    method: "PATCH",
+    headers: { Authorization: "Bearer " + token },
+  })
     .then(function (response) {
       if (!response.ok) {
         return response.json().then(function (erro) {
