@@ -9,9 +9,27 @@
   </head>
   <body>
     <header class="header-com-acao">
-      <h1>ReserveTech — Relatórios</h1>
-      <span id="timer-sessao" title="Tempo restante da sessão"></span>
-      <button id="btn-logout" class="btn-logout">Sair</button>
+      <div class="marca-header">
+        <img
+          src="img/logo_fsaa.png"
+          alt="Logo da faculdade"
+          class="marca-logo"
+        />
+        <div class="marca-textos">
+          <span class="marca-nome">ReserveTech</span
+          ><a href="sobre.html" class="link-sobre-interno">Sobre o projeto</a>
+        </div>
+      </div>
+      <h1>Relatórios</h1>
+      <div class="header-acoes">
+        <button
+          class="btn-tema"
+          onclick="alternarTema()"
+          title="Alternar tema"
+        ></button>
+        <span id="timer-sessao" title="Tempo restante da sessão"></span>
+        <button id="btn-logout" class="btn-logout">Sair</button>
+      </div>
     </header>
 
     <main>
@@ -46,7 +64,9 @@
             id="input-data-relatorio"
             style="
               padding: 6px 10px;
-              border: 1px solid #ccc;
+              border: 1px solid var(--linha);
+              background-color: var(--bg-superficie);
+              color: var(--texto);
               border-radius: 6px;
               margin-right: 10px;
             "
@@ -78,7 +98,9 @@
             id="select-professor"
             style="
               padding: 6px 10px;
-              border: 1px solid #ccc;
+              border: 1px solid var(--linha);
+              background-color: var(--bg-superficie);
+              color: var(--texto);
               border-radius: 6px;
               margin-right: 10px;
             "
@@ -125,6 +147,8 @@
       </div>
     </main>
 
+    <script src="js/config.js"></script>
+    <script src="js/tema.js"></script>
     <script src="js/logout.js"></script>
     <script src="js/relatorios.js"></script>
   </body>
