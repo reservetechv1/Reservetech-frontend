@@ -95,6 +95,10 @@ function carregarProfessores() {
     .then(function (professores) {
       selectProfessor.innerHTML =
         '<option value="">Selecione o professor...</option>';
+      // ordem alfabética (ignora acento e maiúscula: "Álvaro" fica junto do "A")
+      professores.sort(function (a, b) {
+        return a.nome.localeCompare(b.nome, "pt-BR", { sensitivity: "base" });
+      });
       professores.forEach(function (prof) {
         const option = document.createElement("option");
         option.value = prof.id;
