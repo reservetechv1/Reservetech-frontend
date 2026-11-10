@@ -39,7 +39,20 @@
 
         <h2>Gerenciar Equipamentos</h2>
 
+        <div class="coleta-dados campo-busca-usuarios">
+          <input
+            type="search"
+            id="busca"
+            placeholder="Buscar por nome, descrição ou status"
+            autocomplete="off"
+          />
+          <span id="contador" class="contador-usuarios"></span>
+        </div>
+
         <div id="lista-equipamentos"></div>
+        <p id="sem-resultados" class="sem-resultados" hidden>
+          Nenhum equipamento encontrado para essa busca.
+        </p>
       </div>
     </main>
 

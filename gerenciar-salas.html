@@ -39,7 +39,20 @@
 
         <h2>Gerenciar Salas</h2>
 
+        <div class="coleta-dados campo-busca-usuarios">
+          <input
+            type="search"
+            id="busca"
+            placeholder="Buscar por nome ou andar"
+            autocomplete="off"
+          />
+          <span id="contador" class="contador-usuarios"></span>
+        </div>
+
         <div id="lista-salas"></div>
+        <p id="sem-resultados" class="sem-resultados" hidden>
+          Nenhuma sala encontrada para essa busca.
+        </p>
       </div>
     </main>
 

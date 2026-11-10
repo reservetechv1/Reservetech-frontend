@@ -1,5 +1,37 @@
 const token = localStorage.getItem("token");
 const listaEquipamentos = document.querySelector("#lista-equipamentos");
+const campoBusca = document.querySelector("#busca");
+const contador = document.querySelector("#contador");
+const semResultados = document.querySelector("#sem-resultados");
+
+// Tira acentos e deixa minúsculo, para "sala 1" achar "Sala 1" e "ate" achar "Até"
+function normalizar(texto) {
+  return String(texto || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+function aplicarFiltro() {
+  const termo = normalizar(campoBusca.value.trim());
+  const cards = listaEquipamentos.querySelectorAll("[data-busca]");
+  let visiveis = 0;
+
+  cards.forEach(function (card) {
+    const mostrar = !termo || card.dataset.busca.includes(termo);
+    card.style.display = mostrar ? "" : "none";
+    if (mostrar) visiveis++;
+  });
+
+  semResultados.hidden = !(cards.length > 0 && visiveis === 0);
+  contador.textContent = termo
+    ? visiveis + " de " + cards.length + " equipamentos"
+    : cards.length
+      ? cards.length + " equipamentos"
+      : "";
+}
+
+campoBusca.addEventListener("input", aplicarFiltro);
 
 function carregarEquipamentos() {
   fetch(API + "/dispositivos?size=500&sort=nome", {
@@ -13,6 +45,7 @@ function carregarEquipamentos() {
 
       if (pagina.content.length === 0) {
         listaEquipamentos.innerHTML = "<p>Nenhum equipamento cadastrado.</p>";
+        contador.textContent = "";
         return;
       }
 
@@ -20,12 +53,20 @@ function carregarEquipamentos() {
         const card = criarCardEquipamento(equipamento);
         listaEquipamentos.appendChild(card);
       });
+      aplicarFiltro(); // mantém a busca ativa depois de editar ou excluir
     });
 }
 
 function criarCardEquipamento(equipamento) {
   const card = document.createElement("div");
   card.className = "card-reserva";
+  card.dataset.busca = normalizar(
+    equipamento.nome +
+      " " +
+      (equipamento.descricao || "") +
+      " " +
+      equipamento.status.replace(/_/g, " "),
+  );
 
   card.innerHTML =
     "<strong>" +

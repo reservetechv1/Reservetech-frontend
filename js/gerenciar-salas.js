@@ -1,5 +1,37 @@
 const token = localStorage.getItem("token");
 const listaSalas = document.querySelector("#lista-salas");
+const campoBusca = document.querySelector("#busca");
+const contador = document.querySelector("#contador");
+const semResultados = document.querySelector("#sem-resultados");
+
+// Tira acentos e deixa minúsculo, para "sala 1" achar "Sala 1" e "ate" achar "Até"
+function normalizar(texto) {
+  return String(texto || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+function aplicarFiltro() {
+  const termo = normalizar(campoBusca.value.trim());
+  const cards = listaSalas.querySelectorAll("[data-busca]");
+  let visiveis = 0;
+
+  cards.forEach(function (card) {
+    const mostrar = !termo || card.dataset.busca.includes(termo);
+    card.style.display = mostrar ? "" : "none";
+    if (mostrar) visiveis++;
+  });
+
+  semResultados.hidden = !(cards.length > 0 && visiveis === 0);
+  contador.textContent = termo
+    ? visiveis + " de " + cards.length + " salas"
+    : cards.length
+      ? cards.length + " salas"
+      : "";
+}
+
+campoBusca.addEventListener("input", aplicarFiltro);
 
 function carregarSalas() {
   fetch(API + "/salas?size=500&sort=nome", {
@@ -13,18 +45,21 @@ function carregarSalas() {
 
       if (pagina.content.length === 0) {
         listaSalas.innerHTML = "<p>Nenhuma sala cadastrada.</p>";
+        contador.textContent = "";
         return;
       }
 
       pagina.content.forEach(function (sala) {
         listaSalas.appendChild(criarCardSala(sala));
       });
+      aplicarFiltro(); // mantém a busca ativa depois de editar ou excluir
     });
 }
 
 function criarCardSala(sala) {
   const card = document.createElement("div");
   card.className = "card-reserva";
+  card.dataset.busca = normalizar(sala.nome + " " + sala.andar);
 
   card.innerHTML = "<strong>" + sala.nome + "</strong> — " + sala.andar;
 
